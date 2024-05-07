@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Imovel, Registro
+from .models import Cliente, Imovel, Registro, Subscriber
 
 ## Cadastra Cliente          
 class ClienteForm(forms.ModelForm):
@@ -58,3 +58,9 @@ class RegistroLocacaoForm(forms.ModelForm):
         super().__init__(*args, **kwargs)  
         for field_name, field in self.fields.items():   
             field.widget.attrs['class'] = 'form-control'
+
+class SubscriberForm(forms.ModelForm):
+    class Meta:
+        model = Subscriber
+        fields = ['email']
+

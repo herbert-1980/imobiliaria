@@ -1,47 +1,67 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+{% load static %}
 
-    <div class="container-fluid">
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border position-relative text-primary" style="width: 6rem; height: 6rem;" role="status"></div>
+    <img class="position-absolute top-50 start-50 translate-middle" src="{% static 'images/icons/icon-1.png' %}" alt="Icon">
+</div>
+<!-- Spinner End -->
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <a class="navbar-brand" href="#">..::Alugue Bem::..</a>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-
-            <ul class="navbar-nav gap-3 mb-2 mb-lg-0 mx-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'relatorios' %}">Relatórios</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Cadastrar
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li>
-                            <a class="dropdown-item" href="{% url 'cliente_create' %}">Cliente</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{% url 'imovel_create' %}">Imóvel</a>
-                        </li>
-                    </ul>
-                </li> 
-            </ul>
-
-            <a class="navbar-brand" href="#">@herbert-1980</a> 
-
+<!-- Topbar Start -->
+<div class="container-fluid bg-dark p-0 wow fadeIn" data-wow-delay="0.1s">
+    <div class="row gx-0 d-none d-lg-flex">
+        <div class="col-lg-7 px-5 text-start">
+            <div class="h-100 d-inline-flex align-items-center py-3 me-3">
+                <a class="text-body px-2" href="https://wa.me/5567991363900" target="_blank"><i class="fa fa-phone-alt text-primary me-2"></i>+5567991363900</a>
+                <a class="text-body px-2" href="mailto:herbertmesquita@gmail.com"><i class="fa fa-envelope-open text-primary me-2"></i>herbertmesquita@gmail.com</a>
+            </div>
         </div>
-
+        <div class="col-lg-5 px-5 text-end">
+            <div class="h-100 d-inline-flex align-items-center py-3 me-2">
+                <a class="text-body px-2" href="">Terms</a>
+                <a class="text-body px-2" href="">Privacy</a>
+            </div>
+            <div class="h-100 d-inline-flex align-items-center">
+                <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-0" href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </div>
+</div>
+<!-- Topbar End -->
 
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+    <a href="/" class="navbar-brand ms-4 ms-lg-0">
+        <h1 class="text-primary m-0"><img class="me-3" src="{% static 'images/icons/icon_logo.png' %}" alt="Icon">Alugue Bem</h1>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="/" class="nav-item nav-link active">Home</a>
+            <a href="{% url 'sobre' %}" class="nav-item nav-link">Sobre-Nós</a>
+            <a href="service.html" class="nav-item nav-link">Serviços</a>
+            <a href="{% url 'relatorios' %}" class="nav-item nav-link">Buscas</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu border-0 m-0">
+                    <a href="feature.html" class="dropdown-item">Our Features</a>
+                    <a href="project.html" class="dropdown-item">Our Projects</a>
+                    <a href="team.html" class="dropdown-item">Team Members</a>
+                    <a href="appointment.html" class="dropdown-item">Appointment</a>
+                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                    <a href="404.html" class="dropdown-item">404 Page</a>
+                </div>
+            </div>
+            <a href="{% url 'contato' %}" class="nav-item nav-link">Contatos</a>
+        </div>
+        <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logar</a>
+    </div>
 </nav>
+<!-- Navbar End -->

@@ -5,6 +5,8 @@ from .models import Imovel, ImovelImagem
 # Register your models here.
 admin.site.register(models.Cliente)
 admin.site.register(models.Registro)
+admin.site.register(models.Subscriber)
+admin.site.register(models.Sobre)
 
 #admin.site.register(models.Imovel)
 #admin.site.register(models.ImovelImagem)

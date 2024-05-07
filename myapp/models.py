@@ -65,3 +65,21 @@ class Registro(models.Model):
         verbose_name_plural = "Registrar Locação"
         ordering = ['-id']
         
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True)
+    subrscribed_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.email
+    
+class Sobre(models.Model):
+    titulo = models.CharField(max_length=255)
+    texto = models.TextField(blank=False, null=False)
+    ativado = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.titulo
+    
+    class Meta:
+        verbose_name = "Página Sobre Nós"
+        verbose_name_plural = "Sobre"

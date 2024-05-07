@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from myapp.forms import ClienteForm, ImovelForm
-from .models import Imovel, ImovelImagem
+from .models import Imovel, ImovelImagem, Sobre
 from .forms import RegistroLocacaoForm
+from .forms import SubscriberForm
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+
 from django.db.models import Q
 
 # Create your views here.
@@ -70,7 +74,7 @@ def relatorios(request):
     
     if data_inicio and data_final: ## Por data
         imovel = Imovel.objects.filter(
-						reg_locacaon__create_at__range=[data_inicio,data_final])
+						reg_locacao__criacao__range=[data_inicio,data_final])
     
     if cliente: ## Filtra por nome e email do cliente
         imoveis = imoveis.filter(
@@ -85,3 +89,49 @@ def relatorios(request):
         imoveis = imoveis.filter(alugado=alugado) 
         
     return render(request, 'relatorios.html', {'imoveis': imoveis})
+
+def subscribe(request):
+    if request.method == 'POST':
+        form = SubscriberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('newsletter_success')
+    else:
+        form = SubscriberForm()
+    return render(request, 'index.html', {'form': form})
+
+
+def sobre(request):
+    sobre = Sobre.objects.filter(ativado=True)
+    context = {
+        'sobre_info': sobre,
+        }
+    return render(request, 'sobre.html', context)
+
+def contato(request):
+    if request.method =='POST':
+        #Obter os dados do formulário de contato
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        num_telefone = request.POST.get('num_telefone')
+        categoria = request.POST.get('categoria')
+        data = request.POST.get('data')
+        horario = request.POST.get('horario')
+        mensagem = request.POST.get('mensagem')
+        
+        # Construimos a mensagem do E0mail
+        email_message = f"Nome: {nome}\nEmail: {email}\nNumero do Telefone: {num_telefone}\n\nCategoria: {categoria}\n\nData: {data}\n\nHorário: {horario}\n\nMensagem: {mensagem}"
+        
+        # enviamos o email
+        send_mail(
+            'Assunto do email',
+            email_message,
+            'herbertmesquita@gmail.com', #Email do remetente
+            ['destinatario@gmail.com'], # Lista de e-mails de destino
+            fail_silently=False,
+        )
+        
+        #Redirecionar para a página de sucesso após o envio do e-mail
+        return HttpResponseRedirect('contato/sucesso/')
+    
+    return render(request, 'contato.html')
